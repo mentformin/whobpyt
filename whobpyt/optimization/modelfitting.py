@@ -57,7 +57,7 @@ class Model_fitting:
         with open(filename, 'wb') as f:
             pickle.dump(self, f)
 
-    def train(self, learningrate=0.05, u=0):
+    '''def train(self, learningrate=0.05, u=0):
         """
         Parameters
         ----------
@@ -244,7 +244,7 @@ class Model_fitting:
         if self.model.model_name == 'JR' and self.model.use_fit_lfm:
             self.output_sim.leadfield = np.array(fit_lm)
         for key, value in fit_param.items():
-            setattr(self.output_sim, key, np.array(value))
+            setattr(self.output_sim, key, np.array(value))'''
 
     def test(self, base_window_num, u=0):
         """
@@ -321,12 +321,12 @@ class Model_fitting:
 
         fc_sim = np.corrcoef(ts_sim[:, transient_num:])
         print(np.corrcoef(fc_sim[mask_e], fc[mask_e])[0, 1], 'cos_sim: ',
-                  np.diag(cosine_similarity(ts_sim, ts_emp)).mean())
+                  np.diag(cosine_similarity(ts_sim, ts_emp)).mean()) #Scipy function!
         for name in self.model.state_names + [self.output_sim.output_name]:
             tmp_ls = getattr(self.output_sim, name + '_test')
             setattr(self.output_sim, name + '_test', np.concatenate(tmp_ls, axis=1))
 
-    def test_realtime(self, tr_p, step_size_n, step_size, num_windows):
+    '''def test_realtime(self, tr_p, step_size_n, step_size, num_windows):
         if self.model.model_name == 'RWW':
             mask = np.tril_indices(self.model.node_size, -1)
 
@@ -378,4 +378,4 @@ class Model_fitting:
                 tmp_ls = getattr(self.output_sim, name + '_test')
                 setattr(self.output_sim, name + '_test', np.concatenate(tmp_ls, axis=1))
         else:
-            print("only RWW model for the test_realtime function")
+            print("only RWW model for the test_realtime function")'''
